@@ -76,6 +76,6 @@ Open `nvim` — plugins will auto-install on first launch via lazy.nvim. Run `:M
   - `Space Space` — switch buffers
 
 ### tmux
-- **Prefix**: `Ctrl-a` (rebound from `Ctrl-b`)
+- **Prefix**: `Ctrl-b` (default)
 - **Pane navigation**: `prefix + h/j/k/l`
 - **Mouse**: enabled
