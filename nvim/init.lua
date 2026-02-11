@@ -180,7 +180,11 @@ vim.o.confirm = true
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('n', ']b', ':bnext<CR>', { silent = true, desc = 'Next buffer' })
 vim.keymap.set('n', '[b', ':bprev<CR>', { silent = true, desc = 'Previous buffer' })
+vim.keymap.set({'n', 'i'}, '<C-s>', '<cmd>w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- macOS-friendly delete keymap (insert + command-line mode)
+vim.keymap.set({ 'i', 'c' }, '<M-BS>', '<C-w>', { desc = 'Delete word backward (Option+Backspace)' })
 
 -- Diagnostic Config & Keymaps
 -- See :help vim.diagnostic.Opts
@@ -397,7 +401,10 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          find_files = { previewer = false },
+          buffers = { previewer = false },
+        },
         extensions = {
           ['ui-select'] = { require('telescope.themes').get_dropdown() },
         },
@@ -613,7 +620,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -623,7 +630,7 @@ require('lazy').setup({
       --    :Mason
       --
       -- You can press `g?` for help in this menu.
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local ensure_installed = {}
       vim.list_extend(ensure_installed, {
         'lua-language-server',
         'stylua',
